@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MineSweeper</title>
+    <link rel="stylesheet" href="styles.css">
+    </link>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            size：{{board.size + "*" + board.size}} ( range 10 - 20 )
+        </div>
+        <div>
+            bombs：{{board.bombs}} ( range 10 - 25 )
+        </div>
+        <div>
+            right click to flag
+        </div>
+        <div class="row" v-for="row in size">
+            <div class="cell" :class="{open:board[(row-1)+' '+(column-1)].open,flag:board[(row-1)+' '+(column-1)].flag}"
+                v-for="column in size" @click="clickCell(row-1,column-1)" @click.ctrl.prevent="flagCell(row-1,column-1)"
+                @click.right.prevent="flagCell(row-1,column-1)">
+                <span v-if="board[(row-1)+' '+(column-1)].open">
+                    {{ board[(row-1)+" "+(column-1)].neighborMines || "" }}
+                </span>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
