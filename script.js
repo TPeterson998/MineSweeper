@@ -1,7 +1,9 @@
 "use strict"
 // These are two const for the random number of cells and how many bombs their are 
-const bombs = Math.floor(10 + (Math.random() * 15));
-const size = Math.floor(10 + (Math.random() * 10));
+var bombs = Math.floor(10 + (Math.random() * 15));
+var size = Math.floor(10 + (Math.random() * 10));
+
+
 // This makes the cell class 
 class Cell {
     //This constructor makes this class an object with the parameters of row and columns 
@@ -39,15 +41,18 @@ class Board {
         }
         this.assignMines()
     }
+
     // This is called above every time the board is reset 
     assignMines() {
-        // This 
+        // This is to define the bombs that are referenced in other classes
         let bombs = this.bombs
         while (bombs > 0) {
+            //this makes random where the bombs go
             let row = Math.floor(Math.random() * this.size)
             let column = Math.floor(Math.random() * this.size)
             if (!this[row + " " + column].mine) {
                 this[row + " " + column].mine = true
+                // this gets the next function that is made
                 let neighbors = this.getNeighbors(row, column)
                 for (let cell of neighbors) {
                     cell.neighborMines += 1
@@ -56,6 +61,7 @@ class Board {
             }
         }
     }
+    //this finds the neighbors of a cell by looking at the different cells around it by taking away one from the columns or rows parameters
     getNeighbors(row, column) {
         let neighbors = []
         neighbors.push(this[(row - 1) + " " + (column - 1)])
@@ -68,11 +74,12 @@ class Board {
         neighbors.push(this[(row + 1) + " " + (column + 1)])
         return neighbors.filter(Boolean)
     }
+    // This adds things
     openCell(row, column) {
         if (this[row + " " + column].flag) {
             this[row + " " + column].flag = false
         } else if (this[row + " " + column].mine) {
-            alert("you loss")
+            alert("You lose. Try again?")
             this.refresh()
         } else if (!this[row + " " + column].open) {
             this[row + " " + column].open = true
@@ -85,7 +92,7 @@ class Board {
             }
         }
         if (this.open + this.bombs === this.size * this.size) {
-            alert("you win")
+            alert("You Win. Play again?")
             this.refresh()
         }
     }
@@ -93,6 +100,7 @@ class Board {
         this[row + " " + column].flag = !this[row + " " + column].flag
     }
 }
+//this calls in the rest of the things to set up the board
 var app = new Vue({
     el: '#app',
     data: {

@@ -1,6 +1,26 @@
+html {
+    background-color: rgb(66, 138, 56);
+}
+
 * {
     margin: 0px;
     padding: 0px;
+}
+
+#app {
+    text-align: center;
+}
+
+#title {
+    font-size: 3em;
+    ;
+    text-align: center;
+    color: rgb(248, 246, 246);
+}
+
+button {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cell {
@@ -14,9 +34,9 @@
 }
 
 .cell.open {
-    background-color: bisque;
+    background-color: rgb(180, 147, 106);
 }
 
 .cell.flag {
-    background-color: black
+    background-color: rgb(177, 54, 54)
 }
