@@ -1,6 +1,6 @@
 "use strict"
 // These are two const for the random number of cells and how many bombs their are 
-let bombs = 30;
+let bombs = 40;
 let size = 17;
 
 document.getElementById("avg").onclick = function () {
